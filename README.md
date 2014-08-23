@@ -18,7 +18,7 @@ var selfref = require('self-referential');
 
 `selfref.toFlatHier(cfg, collectionData);`
 
-`selfref.rootElements(cfg, collectionData);`
+`selfref.rootItems(cfg, collectionData);`
 
 Where cfg has the following properties: 
 
@@ -170,6 +170,16 @@ var flat_but_in_hierarchical_order_cats = selfref.toFlatHier(cfg, categories);
 flat_but_in_hierarchical_order_cats now has the following structure: 
 ```
 [
+       {
+              item: object: <your original item>
+              hierPos: string: <position of item in a hierarchy such as 1.1 or 1.2.1 as in a table of contents in a book>
+              depth: int: <depth of item in hierarchy, root has the value of zero>
+              childCount: int: <number of children>
+       }
+       ...
+]
+```
+[
     {
         "item": {
             "id": 1,
@@ -256,7 +266,7 @@ flat_but_in_hierarchical_order_cats now has the following structure:
 Finally, to get only the root elements of our collection, we do: 
 ```
 // only selfKey and parentKey is necessary for cfg parameter
-var root_cats = selfref.rootElements(cfg, categories);
+var root_cats = selfref.rootItems(cfg, categories);
 ```
 root_cats now has the following data:
 ```
