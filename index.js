@@ -17,24 +17,9 @@
     function isDefined(val) {
         return typeof val !== 'undefined';
     };
-
-    function pluck(list, key){
-        var result = [];
-        if (list && isArray(list)) {
-            var len = list.length;
-            for (var i = 0; i < len; i++){
-                var item = list[i];
-                if (isDefined(item[key])) {
-                    result.push(list[i][key]);
-                }
-            }
-        }
-        return result;
-    };
    
     function rootItems(cfg, list){
-        if (typeof cfg.selfKey === 'undefined'
-                || typeof cfg.parentKey === 'undefined'){
+        if (!isDefined(cfg.selfKey) || !isDefined(cfg.parentKey)){
             throw new Error("Both selfKey and parentKey properties of cfg parameter must be defined");
         }
         // cfg.selfKey, 
@@ -67,17 +52,12 @@
 
 
     function toHier(cfg, list){
-        if (typeof cfg.selfKey === 'undefined'
-                || typeof cfg.parentKey === 'undefined'
-                || typeof cfg.childrenKey === 'undefined'){
+        if (!isDefined(cfg.selfKey) 
+                || !isDefined(cfg.parentKey) 
+                || !isDefined(cfg.childrenKey) ){
             throw new Error("selfKey, parentKey, and childrenKey properties of cfg parameter must be defined");
         }
-        //cfg.parentKey
-        //// cfg.selfKey
-        // cfg.rootParentValues
-        //  ---- removed cfg.rootIndicators
-        // cfg.childrenKey
-
+        
         //var iterations = 0;
         function getChildren(parent){
             var results = [];
@@ -187,7 +167,7 @@
         // here, `this` means `window` in the browser, or `global` on the server
         // add `numeral` as a global object via a string identifier,
         // for Closure Compiler 'advanced' mode
-        this['selfRefential'] = selfRef;
+        this['selfReferential'] = selfRef;
     }
 
     /*global define:false */
