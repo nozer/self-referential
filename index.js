@@ -5,9 +5,15 @@
  */
 (function() {
     'use strict';
-    function isArray(val){
-        return toString.call(val) === '[object Array]';
-    };
+    var isArray = (function() {
+        if (typeof Array.isArray !== 'function') {
+          return function(value) {
+            return toString.call(value) === '[object Array]';
+          };
+        }
+        return Array.isArray;
+    })();
+    
     function isDefined(val) {
         return typeof val !== 'undefined';
     };
