@@ -95,7 +95,7 @@ var categories = [
    ];
 ```
 
-####To Hierarchy
+####To Nested Hierarchy
 To convert this to a hierarchy, we do...
 ```
 var cfg = {
@@ -162,6 +162,7 @@ cats_hierarchy has the following structure
     }
 ]
 ``` 
+####To Flat Hierarchy
 To convert this into a flat list of collection but in hierarchical order, we do: 
 ```
 var flat_but_in_hierarchical_order_cats = selfref.toFlatHier(cfg, categories);
@@ -251,7 +252,7 @@ flat_but_in_hierarchical_order_cats now has the following structure:
     }
 ]
 ```
-
+####Root Elements
 Finally, to get only the root elements of our collection, we do: 
 ```
 // only selfKey and parentKey is necessary for cfg parameter
