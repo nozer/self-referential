@@ -14,23 +14,23 @@ var selfref = require('self-referential');
 ```
 
 ###Usage
-`selfref.toHier(cfg, collectionData);`
-
-`selfref.toFlatHier(cfg, collectionData);`
-
-`selfref.rootItems(cfg, collectionData);`
-
-Where cfg has the following properties: 
+Configuration parameter cfg can have the following properties: 
 
 `selfKey`:  name of property that is uniquely identifies this record
 
 `parentKey`:  name of property that refers to its parent's unique id
 
-*Following two are not required for .rootItems method*
-
 `childrenKey`:  name of the property that the children of this model should be set to 
 
 `rootValues`: optional: (null|string|number|array), values of parentKeys that identifies a record as one of the root models; if none is given, they will be figured out by the system
+
+ `selfref.toHier(cfg, collectionData);` cfg must have all of the above properties (except rootValues)
+
+`selfref.toFlatHier(cfg, hierarchyCollection);` cfg must have `childrenKey` property only
+
+`selfref.rootItems(cfg, collectionData);` cfg must have `selfKey` and `parentKey` properties
+
+
 
 
 
@@ -163,9 +163,9 @@ cats_hierarchy has the following structure
 ]
 ``` 
 ####To Flat Hierarchy
-To convert this into a flat list of collection but in hierarchical order, we do: 
+To convert the above into a flat list of collection but in hierarchical order, we do: 
 ```
-var flat_but_in_hierarchical_order_cats = selfref.toFlatHier(cfg, categories);
+var flat_but_in_hierarchical_order_cats = selfref.toFlatHier({childrenKey: 'children'}, cats_hierarchy);
 ```
 flat_but_in_hierarchical_order_cats now has the following structure: 
 ```

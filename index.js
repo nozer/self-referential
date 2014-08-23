@@ -107,7 +107,7 @@
     };
 
     function flattenHierarchy(cfg, hierList){
-        if (typeof cfg.childrenKey === 'undefined'){
+        if ( !isDefined(cfg.childrenKey)){
             throw new Error("childrenKey property of cfg parameter must be defined");
         }
 
@@ -135,8 +135,8 @@
         return results;
     };
     
-    function toFlatHier(cfg, list){
-        var hier = toHier(cfg, list);
+    function toFlatHier(cfg, hier){
+        //var hier = toHier(cfg, list);
         return flattenHierarchy(cfg, hier);
     };
         
