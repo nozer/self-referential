@@ -6,13 +6,18 @@
     "self-referential",
     "nested"
   ],
-  "author": {
-    "name": "Nihat Ozer"
-  },
+  "author": "Nihat Ozer",
   "version": "1.0.0",
   "repository": {
     "url": "git://github.com/nozer/self-referential.git"
   },
-  "main": "index.js",  
-  "homepage": "https://github.com/nozer/self-referential"  
+  "main": "index.js",
+  "homepage": "https://github.com/nozer/self-referential",
+  "bugs": {
+    "url": "https://github.com/nozer/self-referential/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "BSD-2-Clause"
 }
