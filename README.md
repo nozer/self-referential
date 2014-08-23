@@ -26,7 +26,7 @@ Where cfg has the following properties:
 
 `parentKey`:  name of property that refers to its parent's unique id
 
-***Following two are not required for .rootElements method***
+*Following two are not required for .rootItems method*
 
 `childrenKey`:  name of the property that the children of this model should be set to 
 
@@ -178,6 +178,7 @@ flat_but_in_hierarchical_order_cats now has the following structure:
        }
        ...
 ]
+```
 ```
 [
     {
