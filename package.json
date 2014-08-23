@@ -1,0 +1,18 @@
+{
+  "name": "self-referential",
+  "description": "Convert self referential collection to nested or flat hierarchy",
+  "keywords": [
+    "hierarchy",
+    "self-referential",
+    "nested"
+  ],
+  "author": {
+    "name": "Nihat Ozer"
+  },
+  "version": "1.0.0",
+  "repository": {
+    "url": "git://github.com/nozer/self-referential.git"
+  },
+  "main": "index.js",  
+  "homepage": "https://github.com/nozer/self-referential"  
+}
