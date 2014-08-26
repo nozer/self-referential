@@ -17,7 +17,7 @@ id | title | parentId
 --- | --- | ---
 1 | Colors | null
 2 | Fruits | null
-3 | Mears | null
+3 | Meats | null
 4 | Warm Colors | 1
 5 | Cold Colors | 1
 6 | Red | 4
@@ -78,11 +78,6 @@ var cfg = {
     selfKey: 'id'
     parentKey: 'parentId'
     childrenKey: 'children'
-
-    // specifies parentKey value/values for nodes that they and their children should be picked for hierarchy. 
-    // if omitted, all of items with no matching parents will be picked as root items and then 
-    // hierarchy will be generated with them and their children. 
-    rootParentValues: null 
 };
 var cats_hierarchy = selfref.toHier(cfg, categories);
 ```
@@ -278,7 +273,17 @@ Configuration parameter cfg can have the following properties:
 
 `childrenKey`:  name of the property that the children of this model should be set to 
 
-`rootParentValues`: optional: (null|string|number|array), values of parentKeys that identifies a record as one of the root models; if none is given, they will be figured out by the system
+`rootParentValues`: null|string|number|array
+> Sets nodes whose parentKey values you are specifying as the root nodes in hierarchy and goes from there  
+
+
+`rootSelfValues: null|string|number|array
+> Sets nodes whose selfKey values you are specifying as the root nodes in hierarchy and goes from there  
+
+> if any of those rootXValues are omitted, all of items with no matching parents will be picked as root items and then 
+> hierarchy will be generated with them and their children. 
+
+> You cannot specify both rootParentValues and rootSelfValues at the same time
 
  `selfref.toHier(cfg, collectionData);` cfg must have all of the above properties (except rootParentValues)
 

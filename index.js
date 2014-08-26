@@ -44,14 +44,33 @@
         }
         return roots;
     };
-
-
+    
+    function itemsWithTheseSelfVals(cfg, vals, list){
+        if (!list || !isArray(list)){
+            return [];
+        }
+        var results = [];
+        for (var i in list){
+            if (vals.indexOf(list[i][cfg.selfKey]) >=0 ) {
+                results.push(list[i]);
+            }
+        }
+        return results;
+    };
+    
+    function makeArrayIfNot(val){
+        return isArray(val)  ? val : [val];
+    }
 
     function toHier(cfg, list){
         if (!isDefined(cfg.selfKey) 
                 || !isDefined(cfg.parentKey) 
                 || !isDefined(cfg.childrenKey) ){
             throw new Error("selfKey, parentKey, and childrenKey properties of cfg parameter must be defined");
+        }
+        
+        if (isDefined(cfg.rootParentValues) && isDefined(cfg.rootSelfValues)){
+            throw new Error("rootParentValues and rootSelfValues are mutually exclusive; please set only one of them");
         }
         
         //var iterations = 0;
@@ -73,20 +92,20 @@
         var results = [];
 
         var rootItems_ = [];
-        if (typeof cfg.rootParentValues !== 'undefined') {
-            var rootValues;
-            if (isArray(cfg.rootParentValues)) {
-                rootValues = cfg.rootParentValues;
-            } else {
-                rootValues = [cfg.rootParentValues];
-            }
-            for (var i=1; i<list.length; i++){
-                var item = list[i];
-                if (rootValues.indexOf(item[cfg.parentKey]) >=0) {
-                    rootItems_.push(item);
+        var rootsDefined = isDefined(cfg.rootSelfValues) || isDefined(cfg.rootParentValues);
+        if (rootsDefined){
+            if (isDefined(cfg.rootSelfValues)) {
+                var selfValues = makeArrayIfNot(cfg.rootSelfValues);
+                rootItems_ = itemsWithTheseSelfVals(cfg, selfValues, list);
+            } else { 
+                var rootValues = makeArrayIfNot(cfg.rootParentValues);            
+                for (var i=0; i<list.length; i++){
+                    var item = list[i];
+                    if (rootValues.indexOf(item[cfg.parentKey]) >=0) {
+                        rootItems_.push(item);
+                    }
                 }
             }
-            
         } else {
             rootItems_ = rootItems(cfg, list);
             //rootValues = pluck(rootItems_, cfg.selfKey);
