@@ -277,7 +277,7 @@ Configuration parameter cfg can have the following properties:
 > Sets nodes whose parentKey values you are specifying as the root nodes in hierarchy and goes from there  
 
 
-`rootSelfValues: null|string|number|array
+`rootSelfValues`: null|string|number|array
 > Sets nodes whose selfKey values you are specifying as the root nodes in hierarchy and goes from there  
 
 > if any of those rootXValues are omitted, all of items with no matching parents will be picked as root items and then 
