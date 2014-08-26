@@ -1,41 +1,17 @@
 self-referential
 ================
 
-Allows a self referential collection to be converted into a nested or flat hierarchy
+Allows a self referential collection (array of objects) to be converted into a nested or flat hierarchy
 
-###Install
+###Install & Require
 ```
 npm install self-referential 
-```
 
-###Require
-```
 var selfref = require('self-referential');
 ```
 
-###Usage
-Configuration parameter cfg can have the following properties: 
-
-`selfKey`:  name of property that is uniquely identifies this record
-
-`parentKey`:  name of property that refers to its parent's unique id
-
-`childrenKey`:  name of the property that the children of this model should be set to 
-
-`rootValues`: optional: (null|string|number|array), values of parentKeys that identifies a record as one of the root models; if none is given, they will be figured out by the system
-
- `selfref.toHier(cfg, collectionData);` cfg must have all of the above properties (except rootValues)
-
-`selfref.toFlatHier(cfg, hierarchyCollection);` cfg must have `childrenKey` property only
-
-`selfref.rootItems(cfg, collectionData);` cfg must have `selfKey` and `parentKey` properties
-
-
-
-
-
 ###Examples
-Imagine a table named `categories` like below where parentId refers to a record in the same `categories` table with some foreign key (in this case parentId)
+Imagine a table named `categories` like below where `parentId` foreign key refers to a record in the same `categories` table.
 
 id | title | parentId
 --- | --- | ---
@@ -48,7 +24,7 @@ id | title | parentId
 7 | Orange | 4
 8 | Apple | 2
 
-We can represent this table as an array of objects as follows:
+We can represent this table as an array of objects as shown below:
 
 ```
 var categories = [
@@ -96,13 +72,17 @@ var categories = [
 ```
 
 ####To Nested Hierarchy
-To convert this to a hierarchy, we do...
+To convert this to a nested hierarchy, we do: 
 ```
 var cfg = {
     selfKey: 'id'
     parentKey: 'parentId'
     childrenKey: 'children'
-    rootValues: null 
+
+    // specifies parentKey value/values for nodes that they and their children should be picked for hierarchy. 
+    // if omitted, all of items with no matching parents will be picked as root items and then 
+    // hierarchy will be generated with them and their children. 
+    rootParentValues: null 
 };
 var cats_hierarchy = selfref.toHier(cfg, categories);
 ```
@@ -163,7 +143,7 @@ cats_hierarchy has the following structure
 ]
 ``` 
 ####To Flat Hierarchy
-To convert the above into a flat list of collection but in hierarchical order, we do: 
+To convert the above hierarchy into a flat collection, but in the same order as it would be in the hierarchy, we do: 
 ```
 var flat_but_in_hierarchical_order_cats = selfref.toFlatHier({childrenKey: 'children'}, cats_hierarchy);
 ```
@@ -266,8 +246,7 @@ flat_but_in_hierarchical_order_cats now has the following structure:
 ####Root Elements
 Finally, to get only the root elements of our collection, we do: 
 ```
-// only selfKey and parentKey is necessary for cfg parameter
-var root_cats = selfref.rootItems(cfg, categories);
+var root_cats = selfref.rootItems({selfKey: 'id', parentKey:'parentId'}, categories);
 ```
 root_cats now has the following data:
 ```
@@ -290,4 +269,19 @@ root_cats now has the following data:
 ]
 ```
 
+###Config Parameters & Usage
+Configuration parameter cfg can have the following properties: 
 
+`selfKey`:  name of property that is uniquely identifies this record
+
+`parentKey`:  name of property that whose value refers to its parent's unique id
+
+`childrenKey`:  name of the property that the children of this model should be set to 
+
+`rootParentValues`: optional: (null|string|number|array), values of parentKeys that identifies a record as one of the root models; if none is given, they will be figured out by the system
+
+ `selfref.toHier(cfg, collectionData);` cfg must have all of the above properties (except rootValues)
+
+`selfref.toFlatHier(cfg, hierarchyCollection);` cfg must have `childrenKey` property only
+
+`selfref.rootItems(cfg, collectionData);` cfg must have `selfKey` and `parentKey` properties
