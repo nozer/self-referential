@@ -280,7 +280,7 @@ Configuration parameter cfg can have the following properties:
 
 `rootParentValues`: optional: (null|string|number|array), values of parentKeys that identifies a record as one of the root models; if none is given, they will be figured out by the system
 
- `selfref.toHier(cfg, collectionData);` cfg must have all of the above properties (except rootValues)
+ `selfref.toHier(cfg, collectionData);` cfg must have all of the above properties (except rootParentValues)
 
 `selfref.toFlatHier(cfg, hierarchyCollection);` cfg must have `childrenKey` property only
 
