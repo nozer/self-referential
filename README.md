@@ -75,9 +75,13 @@ var categories = [
 To convert this to a nested hierarchy, we do: 
 ```
 var cfg = {
-    selfKey: 'id'
-    parentKey: 'parentId'
+    selfKey: 'id',
+    parentKey: 'parentId',
     childrenKey: 'children'
+
+    // Optional properties
+    // rootParentValues: see way below for explanation
+    // rootSelfValues : see way below for explanation
 };
 var cats_hierarchy = selfref.toHier(cfg, categories);
 ```
