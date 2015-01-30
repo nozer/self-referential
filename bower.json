@@ -1,0 +1,28 @@
+{
+  "name": "self-referential",
+  "main": "index.js",
+  "version": "1.0.42",
+  "homepage": "https://github.com/nozer/self-referential",
+  "description": "Convert self referential collection to nested or flat hierarchy",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "hierarchy",
+    "self-referential",
+    "nested"
+  ],
+  "authors": [
+    "Nihat Özer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
