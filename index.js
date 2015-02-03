@@ -146,10 +146,10 @@
                 var pos = parentHierPosition + (i+1);
                 results.push({
                     item: item, hierPos: pos, depth: depth,
-                    childCount:item.children ? item.children.length : 0
+                    childCount:item[cfg.childrenKey] ? item[cfg.childrenKey].length : 0
                 });
                 flattenLevel(item[cfg.childrenKey], results, pos, depth+1);
-                delete item.children;
+                delete item[cfg.childrenKey];
             }
         }
         var results = [];
