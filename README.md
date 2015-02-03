@@ -296,7 +296,7 @@ Configuration parameter cfg can have the following properties:
 `selfref.rootItems(cfg, collectionData);` cfg must have `selfKey` and `parentKey` properties
 
 `selfref.getAncestors(cfg, collectionData, selfKeyValue)` returns ancestors of the item having the selfKey property value of selfKeyValue.  
-    cfg must have selfKey and parentKey properties
+    cfg must have `selfKey` and `parentKey` properties
 
 `selfref.getChildren(cfg, collectionData, selfKeyValue)` returns children of the item having the selfKey property value of selfKeyValue.  
-    cfg must have selfKey and parentKey properties
+    cfg must have `selfKey` and `parentKey` properties
