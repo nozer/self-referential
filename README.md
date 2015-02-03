@@ -5,7 +5,7 @@ Allows a self referential collection (array of objects) to be converted into a n
 
 ###Install & Require
 ```
-npm install self-referential 
+npm install self-referential
 
 var selfref = require('self-referential');
 ```
@@ -72,7 +72,7 @@ var categories = [
 ```
 
 ####To Nested Hierarchy
-To convert this to a nested hierarchy, we do: 
+To convert this to a nested hierarchy, we do:
 ```
 var cfg = {
     selfKey: 'id',
@@ -140,13 +140,13 @@ cats_hierarchy has the following structure
         "children": []
     }
 ]
-``` 
+```
 ####To Flat Hierarchy
-To convert the above hierarchy into a flat collection, but in the same order as it would be in the hierarchy, we do: 
+To convert the above hierarchy into a flat collection, but in the same order as it would be in the hierarchy, we do:
 ```
 var flat_but_in_hierarchical_order_cats = selfref.toFlatHier({childrenKey: 'children'}, cats_hierarchy);
 ```
-flat_but_in_hierarchical_order_cats now has the following structure: 
+flat_but_in_hierarchical_order_cats now has the following structure:
 ```
 [
        {
@@ -243,7 +243,7 @@ flat_but_in_hierarchical_order_cats now has the following structure:
 ]
 ```
 ####Root Elements
-Finally, to get only the root elements of our collection, we do: 
+Finally, to get only the root elements of our collection, we do:
 ```
 var root_cats = selfref.rootItems({selfKey: 'id', parentKey:'parentId'}, categories);
 ```
@@ -269,13 +269,13 @@ root_cats now has the following data:
 ```
 
 ###Config Parameters & Usage
-Configuration parameter cfg can have the following properties: 
+Configuration parameter cfg can have the following properties:
 
 `selfKey`:  name of property that is uniquely identifies this record
 
 `parentKey`:  name of property that whose value refers to its parent's unique id
 
-`childrenKey`:  name of the property that the children of this model should be set to 
+`childrenKey`:  name of the property that the children of this model should be set to
 
 `rootParentValues`: null|string|number|array
 > Sets nodes whose parentKey values you are specifying as the root nodes in hierarchy and goes from there  
@@ -284,8 +284,8 @@ Configuration parameter cfg can have the following properties:
 `rootSelfValues`: null|string|number|array
 > Sets nodes whose selfKey values you are specifying as the root nodes in hierarchy and goes from there  
 
-> if any of those rootXValues are omitted, all of items with no matching parents will be picked as root items and then 
-> hierarchy will be generated with them and their children. 
+> if any of those rootXValues are omitted, all of items with no matching parents will be picked as root items and then
+> hierarchy will be generated with them and their children.
 
 > You cannot specify both rootParentValues and rootSelfValues at the same time
 
@@ -294,3 +294,9 @@ Configuration parameter cfg can have the following properties:
 `selfref.toFlatHier(cfg, hierarchyCollection);` cfg must have `childrenKey` property only
 
 `selfref.rootItems(cfg, collectionData);` cfg must have `selfKey` and `parentKey` properties
+
+`selfref.getAncestors(cfg, collectionData, selfKeyValue)` returns ancestors of the item having the selfKey property value of selfKeyValue.  
+    cfg must have selfKey and parentKey properties
+
+`selfref.getChildren(cfg, collectionData, selfKeyValue)` returns children of the item having the selfKey property value of selfKeyValue.  
+    cfg must have selfKey and parentKey properties
