@@ -1,7 +1,7 @@
 {
   "name": "self-referential",
   "main": "index.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/nozer/self-referential",
   "description": "Convert self referential collection to nested or flat hierarchy",
   "moduleType": [
