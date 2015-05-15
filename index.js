@@ -20,9 +20,10 @@
             throw new Error("Both selfKey and parentKey properties of cfg parameter must be defined");
         }
 
+		  var listlen = list.length;
 
         var ids = [];
-        for (var i in list){
+        for (var i = 0; i < listlen; i++){
             var v = list[i][cfg.selfKey];
             if (isDefined(v)) {
                 ids.push(v);
@@ -33,7 +34,7 @@
         }
         var roots = [];
 
-        for (var i in list){
+        for (var i = 0; i < listlen; i++){
             var item = list[i];
             var v = item[cfg.parentKey];
             if (!isDefined(v)) {
@@ -52,7 +53,7 @@
             return [];
         }
         var results = [];
-        for (var i in list){
+        for (var i = 0; i < list.length; i++){
             if (vals.indexOf(list[i][cfg.selfKey]) >=0 ) {
                 results.push(list[i]);
             }
@@ -76,19 +77,23 @@
             throw new Error("rootParentValues and rootSelfValues are mutually exclusive; please set only one of them");
         }
 
+
         //var iterations = 0;
+		  var listlen = list.length;
         function getChildren(parent){
             var results = [];
-            for (var i in list){
+            for (var i = 0; i < listlen; i++){
                 var item = list[i];
                 //iterations++;
                 if (item[cfg.parentKey] === parent) {
                     results.push(item);
+
                     item[cfg.childrenKey] = getChildren(item[cfg.selfKey]);
                 }
             }
             return results;
         };
+
         if (!list || !list.length){
             return [];
         }
@@ -102,7 +107,7 @@
                 rootItems_ = itemsWithTheseSelfVals(cfg, selfValues, list);
             } else {
                 var rootValues = makeArrayIfNot(cfg.rootParentValues);
-                for (var i=0; i<list.length; i++){
+                for (var i=0; i<listlen; i++){
                     var item = list[i];
                     if (rootValues.indexOf(item[cfg.parentKey]) >=0) {
                         rootItems_.push(item);
@@ -115,12 +120,14 @@
         }
 
         var tmp = [];
-        for (var i in rootItems_){
+        for (var i =0; i < rootItems_.length ; i++){
             var item = rootItems_[i];
             item[cfg.childrenKey] = getChildren(rootItems_[i][cfg.selfKey]);
 
             tmp.push(item);
         }
+
+
         for (var i = 0; i <tmp.length; i++){
             results = results.concat(tmp[i]);
         }
